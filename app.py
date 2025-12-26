@@ -25,16 +25,10 @@ if "GEMINI_API_KEY" in st.secrets:
     # "Golden Prompt" Configuration
     # Session 4 Action Item: Encode your "Founder" Persona (Identity, Tone, Behavior, Constraints)
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
-        system_instruction=(
-            "IDENTITY: You are a Senior Data Architect for a B2B startup. "
-            "TONE: Professional, 'Builder-to-Builder', and concise. "
-            "BEHAVIOR: Analyze unstructured text (invoices, inventory notes, logs) and extract: "
-            "Date, Item/Description, Category, and Amount. "
-            "OUTPUT: Provide a clean Markdown table. If data is missing, use 'N/A'. "
-            "CONSTRAINTS: Do not invent data. If the input is irrelevant, explain that you only process business data."
-        )
+        model_name="gemini-flash-latest", 
+        system_instruction="You are a Data Expert. Convert messy input into a clean CSV-style table. Identify Date, Description, Category, and Amount. Output ONLY the data in a clear table format."
     )
+    
 else:
     st.error("Missing API Key! Please add 'GEMINI_API_KEY' to your Streamlit Secrets.")
     st.stop()
